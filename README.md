@@ -34,9 +34,11 @@ pip install -r requirements.txt
 
 ## Example
 `example.ipynb` demonstrates the transferability calculation from pre-training to the Fluorescence task.
+Note that the embeddings of the example need to be download at \
+`https://drive.google.com/drive/folders/1RTphom46oGlJlnw52NSABMNQurWldhJi?usp=sharing`.
 
 ## 1. Data Processing
-Processed data of protein downstream tasks should be placed in the `processed_data` directory. The data format is as follows:\
+Processed data of protein downstream tasks should be placed in the `processed_data` directory. The data format is as follows:
 |uniprot_id|pro_seq|GO|label|
 | :----- | :-----: | :-----: | -----: |
 |fluo_train_17878|SKGEELFT...|No goterm|2|
