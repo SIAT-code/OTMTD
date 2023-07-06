@@ -1,0 +1,76 @@
+# 参数统一配置文件 """
+
+# 蛋白序列编码器的参数
+seq_dim: 768
+seq_hid_dim: 512
+seq_encoder_layer_num: 3
+kernel_size: 7
+seq_dropout: 0.3
+# 蛋白结构编码器的参数
+max_nodes: 1000
+struc_hid_dim: 512
+struc_encoder_layer_num: 2
+node_in_dim: [6, 3]  # node dimensions in input graph, should be (6, 3) if using original features
+node_h_dim: [512, 16] # (struc_hid_dim, 16)  # node dimensions to use in GVP-GNN layers
+edge_in_dim: [32, 1]  # edge dimensions in input graph, should be (32, 1) if using original features
+edge_h_dim: [32, 1]  # edge dimensions to embed to before use in GVP-GNN layers
+struc_dropout: 0.4
+# 蛋白序列和结构融合的参数
+protein_dim: 512
+max_pro_seq_len: 1022
+seq_struc_n_heads: 8
+seq_struc_n_layers: 4
+seq_struc_pf_dim: 2048
+seq_struc_dropout: 0.1
+# Goterm编码器的参数
+go_input_dim: 64
+go_dim: 128
+go_n_heads: 4
+go_n_layers: 3
+go_pf_dim: 512
+go_dropout: 0.1
+# 蛋白和Goterm的交互融合
+fusion_pro_n_layers: 3
+fusion_go_n_layers: 3
+
+# 下游任务数据及finetune模型
+tasks_config_hub:  {
+    'pre_train': ["/data3/eason/Multimodal_pretrain/dataset/sequence_go_structure_63759",
+                  "/data3/eason/Multimodal_pretrain/dataset/sequence_go_structure_63759/sequence_go.txt",]
+    'stability': ["/data3/eason/Multimodal_downstream/dataset/pretrain_benchmark/stability/sequence_go_structure_53614/",
+                    "/data3/eason/Multimodal_downstream/dataset/pretrain_benchmark/stability/sequence_go_structure_53614/sequence_go_train.txt",
+                    "/data3/eason/Multimodal_downstream/src_stability/output/model-2022-07-10-14:02:42/model--2022-07-10-14:02:42.pth"],
+    'remote_homology': ["/data3/eason/Multimodal_downstream/dataset/pretrain_benchmark/remote_homology/sequence_go_structure_12312/",
+                        "/data3/eason/Multimodal_downstream/dataset/pretrain_benchmark/remote_homology/sequence_go_structure_12312/sequence_go_train.txt",
+                        "/data3/eason/Multimodal_downstream/src_remote_homology/output/model-2022-07-31-16:54:21/model_test/model--epoch-3.pth"],
+    'fluorescence': ["/data3/eason/Multimodal_downstream/dataset/pretrain_benchmark/fluorescence/sequence_go_structure_21446/",
+                    "/data3/eason/Multimodal_downstream/dataset/pretrain_benchmark/fluorescence/sequence_go_structure_21446/sequence_go_train.txt",
+                    "/data3/eason/Multimodal_downstream/src_fluorescence/output/model-2022-07-25-15:54:43/model--2022-07-25-15:54:43.pth"],
+    'secondary_structure': ["/data3/eason/Multimodal_downstream/dataset/pretrain_benchmark/secondary_structure/sequence_go_structure_8678/",
+                            "/data3/eason/Multimodal_downstream/dataset/pretrain_benchmark/secondary_structure/sequence_go_structure_8678/sequence_go_train.txt",
+                            "/data3/eason/Multimodal_downstream/src_secondary_structure/output/model-2022-07-25-18:33:42/model--2022-07-25-18:33:42.pth"],
+    'pdbbind': ["/data3/eason/Multimodal_downstream/dataset/PDI/PDBBind/sequence_go_structure_13464",
+                "/data3/eason/Multimodal_downstream/dataset/PDI/PDBBind/sequence_go_structure_13464/samples_seq_mole_go_train.txt",
+                "/data3/eason/Multimodal_downstream/src_pdbbind_v14/output/model-2022-07-19-12:26:04/model--2022-07-19-12:26:04.pth"],
+    'kinase': ["/data3/eason/Multimodal_downstream/dataset/PDI/Kinase/sequence_go_structure_91552",
+                "/data3/eason/Multimodal_downstream/dataset/PDI/Kinase/sequence_go_structure_91552/sequence_go_train.txt",
+                "/data3/eason/Multimodal_downstream/src_kinase/output/model-2022-07-13-11:29:13/model--2022-07-13-11:29:13.pth"],
+    }
+
+# 预训练模型保存路径
+# pretrain_weights_pth: "/data3/eason/Multimodal_downstream/pretrained/epoch150-model-2022-05-25-12:57:55/model--2022-05-25-12:57:55.pth"
+# pretrain_weights_pth : "/data3/eason/Multimodal_downstream/src_stability/output/model-2022-07-30-21:40:55/model_test/model--epoch-7.pth"
+pretrain_weights_pth: "/data3/eason/Multimodal_downstream/pretrained/epoch150-model-2022-05-25-12:57:55/model--2022-05-25-12:57:55.pth"
+# 保存每个蛋白序列一次forward-pass所得的pro_emb
+pro_embs_base_pth: "/home/brian/work/OTMTD_GH/protein_embeddings_MultiTasks/"
+
+attn_vis: False
+get_attn: False
+slicer: [8, 10] # remote homology
+# slicer: [28, 30] # secondary structure
+# slicer: [382, 384] # pdbbind
+
+add_structure: True
+add_goterm: True
+wo_msa: False
+no_go: False
