@@ -15,7 +15,6 @@ A novel method for quantitatively estimating the transfer performance from a mul
 ├── otmtd/                         # Definition files for OTMTD
 ├── otdd/                          # Definition files for OTDD
 ├── otce/                          # Definition files for OTCE
-├── LogME/                         # Definition files for LogME
 ├── represent/                     # Represent protein tasks using MASSA
 ├── processed_data                 # Processed protein downstream task text data
 ├── protein_embeddings_MultiTasks  # Pre-trained or downstream task embeddings
