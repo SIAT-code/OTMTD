@@ -47,7 +47,7 @@ Use `represent/model_interpreter_multi.py` to represent protein tasks, and modif
 ```python
 python model_interpreter_multi.py --batch_size=32 --gpu=0 --ft=multi
 ```
-The generated embeddings have the following format:\
+The generated embeddings have the following format:
 | |pro_id|pro_seq|pro_emb|
 | :----- | :-----: | :-----: | -----: |
 |0|fluo_train_0|SKGEELFT...|[-0.5087447166442871, -2.313387870788574, -0.1...|
