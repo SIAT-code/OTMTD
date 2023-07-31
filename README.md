@@ -1,6 +1,4 @@
 # OTMTD
-**A Transferability-Based Method for Evaluating the Protein Representation Learning** \
-A novel method for quantitatively estimating the transfer performance from a multi-task pre-trained protein representation to downstream tasks.
 
 ## Directory Structure
 ```bash
